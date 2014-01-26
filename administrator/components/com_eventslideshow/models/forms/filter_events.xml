@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field
+			name="search"
+			type="text"
+			label="COM_EVENTSLIDESHOW_SEARCH_IN_TITLE"
+			hint="JSEARCH_FILTER"
+			class="js-stools-search-string" />
+		<field
+			name="state"
+			type="status"
+			label="JOPTION_SELECT_PUBLISHED"
+			statuses="*,0,1,2,-2"
+			description="JOPTION_SELECT_PUBLISHED_DESC"
+			onchange="this.form.submit();">
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+		</field>
+		<field
+			name="datetype"
+			type="datetypes"
+			label="COM_EVENTSLIDESHOW_FILTER_DATETYPE"
+			extension="com_content"
+			description="COM_EVENTSLIDESHOW_FILTER_DATETYPE_DESC"
+			onchange="this.form.submit();">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_DATETYPE</option>
+		</field>
+		<field
+			name="category_id"
+			type="category"
+			label="JOPTION_FILTER_CATEGORY"
+			extension="com_eventslideshow"
+			description="JOPTION_FILTER_CATEGORY_DESC"
+			onchange="this.form.submit();">
+			<option value="">JOPTION_SELECT_CATEGORY</option>
+		</field>
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JOPTION_FILTER_LANGUAGE"
+			description="JOPTION_FILTER_LANGUAGE_DESC"
+			onchange="this.form.submit();">
+			<option value="">JOPTION_SELECT_LANGUAGE</option>
+			<option value="*">JALL</option>
+		</field>
+		<field
+			name="startmonth"
+			type="integer"
+			label="COM_EVENTSLIDESHOW_FILTER_STARTMONTH"
+			description="COM_EVENTSLIDESHOW_FILTER_STARTMONTH_DESC"
+			first="1"
+			step="1"
+			last="12"
+			onchange="this.form.submit();">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_STARTMONTH</option>
+		</field>
+		<field
+			name="startday"
+			type="integer"
+			label="COM_EVENTSLIDESHOW_FILTER_STARTDAY"
+			description="COM_EVENTSLIDESHOW_FILTER_STARTDAY_DESC"
+			first="1"
+			step="1"
+			last="31"
+			onchange="this.form.submit();">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_STARTDAY</option>
+		</field>
+		<field
+			name="endmonth"
+			type="integer"
+			label="COM_EVENTSLIDESHOW_FILTER_ENDMONTH"
+			description="COM_EVENTSLIDESHOW_FILTER_ENDMONTH_DESC"
+			first="1"
+			step="1"
+			last="12"
+			onchange="this.form.submit();">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_ENDMONTH</option>
+		</field>
+		<field
+			name="endday"
+			type="integer"
+			label="COM_EVENTSLIDESHOW_FILTER_ENDDAY"
+			description="COM_EVENTSLIDESHOW_FILTER_ENDDAY_DESC"
+			first="1"
+			step="1"
+			last="31"
+			onchange="this.form.submit();">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_ENDDAY</option>
+		</field>
+	</fields>
+	<fields name="list">
+		<field
+			name="fullordering"
+			type="list"
+			label="JGLOBAL_SORT_BY"
+			description="JGLOBAL_SORT_BY"
+			onchange="this.form.submit();"
+			default="a.title ASC">
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="ordering ASC">JGRID_HEADING_ORDERING_ASC</option>
+			<option value="ordering DESC">JGRID_HEADING_ORDERING_DESC</option>
+			<option value="a.state ASC">JSTATUS_ASC</option>
+			<option value="a.state DESC">JSTATUS_DESC</option>
+			<option value="a.title ASC">JGLOBAL_TITLE_ASC</option>
+			<option value="a.title DESC">JGLOBAL_TITLE_DESC</option>
+			<option value="a.datetype ASC">COM_EVENTSLIDESHOW_HEADING_DATETYPE_ASC</option>
+			<option value="a.datetype DESC">COM_EVENTSLIDESHOW_HEADING_DATETYPE_DESC</option>
+			<option value="a.startmonth ASC">COM_EVENTSLIDESHOW_HEADING_STARTMONTH_ASC</option>
+			<option value="a.startmonth DESC">COM_EVENTSLIDESHOW_HEADING_STARTMONTH_DESC</option>
+			<option value="a.startday ASC">COM_EVENTSLIDESHOW_HEADING_STARTDAY_ASC</option>
+			<option value="a.startday DESC">COM_EVENTSLIDESHOW_HEADING_STARTDAY_DESC</option>
+			<option value="a.endmonth ASC">COM_EVENTSLIDESHOW_HEADING_ENDMONTH_ASC</option>
+			<option value="a.endmonth DESC">COM_EVENTSLIDESHOW_HEADING_ENDMONTH_DESC</option>
+			<option value="a.endday ASC">COM_EVENTSLIDESHOW_HEADING_ENDDAY_ASC</option>
+			<option value="a.endday DESC">COM_EVENTSLIDESHOW_HEADING_ENDDAY_DESC</option>
+			<option value="a.language ASC">JGRID_HEADING_LANGUAGE_ASC</option>
+			<option value="a.language DESC">JGRID_HEADING_LANGUAGE_DESC</option>
+			<option value="a.id ASC">JGRID_HEADING_ID_ASC</option>
+			<option value="a.id DESC">JGRID_HEADING_ID_DESC</option>
+		</field>
+		<field
+			name="limit"
+			type="limitbox"
+			class="inputbox input-mini"
+			default="25"
+			label="COM_EVENTSLIDESHOW_LIST_LIMIT"
+			description="COM_EVENTSLIDESHOW_LIST_LIMIT_DESC"
+			onchange="this.form.submit();" />
+	</fields>
+</form>

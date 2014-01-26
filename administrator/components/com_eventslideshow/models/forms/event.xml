@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="id"
+			type="text"
+			default="0"
+			readonly="true"
+			label="JGLOBAL_FIELD_ID_LABEL"
+            description="JGLOBAL_FIELD_ID_DESC" />
+		<field
+			name="title"
+			type="text"
+			required="true"
+			class="input-xxlarge input-large-text"
+            label="JGLOBAL_TITLE"
+            description="COM_EVENTSLIDESHOW_FIELD_TITLE_DESC" />
+		<field
+			name="alias"
+			type="text"
+			label="JFIELD_ALIAS_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_ALIAS_DESC"
+			hint="JFIELD_ALIAS_PLACEHOLDER" />
+		<field
+			addfieldpath="/administrator/components/com_categories/models/fields"
+			name="catid"
+			type="categoryedit"
+			required="true"
+			extension="com_eventslideshow"
+			class="advancedSelect"
+			label="JCATEGORY"
+			description="COM_EVENTSLIDESHOW_FIELD_CATEGORY_DESC" />
+		<field
+			name="datetype"
+			type="datetypes"
+			required="true"
+            label="COM_EVENTSLIDESHOW_FIELD_DATETYPE_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_DATETYPE_DESC">
+			<option value="">COM_EVENTSLIDESHOW_SELECT_DATETYPE</option>
+		</field>
+		<field
+			name="startmonth"
+			type="integer"
+			required="true"
+			first="1"
+			last="12"
+			step="1"
+			filter="INT"
+			class="input-mini"
+            label="COM_EVENTSLIDESHOW_FIELD_STARTMONTH_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_STARTMONTH_DESC" />
+		<field
+			name="startday"
+			type="integer"
+			required="true"
+			first="1"
+			last="31"
+			step="1"
+			filter="INT"
+			class="input-mini"
+            label="COM_EVENTSLIDESHOW_FIELD_STARTDAY_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_STARTDAY_DESC" />
+		<field
+			name="endmonth"
+			type="integer"
+			required="true"
+			first="1"
+			last="12"
+			step="1"
+			filter="INT"
+			class="input-mini"
+            label="COM_EVENTSLIDESHOW_FIELD_ENDMONTH_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_ENDMONTH_DESC" />
+		<field
+			name="endday"
+			type="integer"
+			required="true"
+			first="1"
+			last="31"
+			step="1"
+			filter="INT"
+			class="input-mini"
+            label="COM_EVENTSLIDESHOW_FIELD_ENDDAY_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_ENDDAY_DESC" />
+		<field
+			name="image"
+			type="media"
+			preview="true"
+			required="true"
+            label="COM_EVENTSLIDESHOW_FIELD_IMAGE_LABEL"
+            description="COM_EVENTSLIDESHOW_FIELD_IMAGE_DESC" />
+		<field
+			name="clickurl"
+			type="url"
+			filter="url"
+			class="span9 ltr"
+			label="COM_EVENTSLIDESHOW_FIELD_CLICKURL_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_CLICKURL_DESC" />
+		<field
+			addfieldpath="/administrator/components/com_content/models/fields"
+			name="clickarticle"
+			type="modal_article"
+			edit="true"
+			label="COM_EVENTSLIDESHOW_FIELD_CLICKARTICLE_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_CLICKARTICLE_DESC" />
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_LANGUAGE_DESC">
+			<option value="*">JALL</option>
+		</field>
+		<field
+			name="description"
+			type="textarea"
+			rows="3"
+			cols="100"
+			class="span9"
+            label="JGLOBAL_DESCRIPTION"
+            description="COM_EVENTSLIDESHOW_FIELD_DESCRIPTION_DESC" />
+		<field
+			name="state"
+			type="Status"
+			filter="1,0,2,-2"
+			label="JSTATUS"
+			description="COM_EVENTSLIDESHOW_FIELD_STATE_DESC"
+			default="1" />
+		<field name="checked_out" type="hidden" filter="unset" />
+		<field name="checked_out_time" type="hidden" filter="unset" />
+	</fieldset>
+</form>
