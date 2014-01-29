@@ -56,6 +56,7 @@ class EventslideshowViewEvent extends JViewLegacy
 		$user       = JFactory::getUser();
 		$isNew      = ($this->item->id == 0);
 		$checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
+		$authCats   = count($user->getAuthorisedCategories('com_eventslideshow', 'core.create'));
 
 		// Since we don't track these assets at the item level, use the category id.
 		$canDo      = JHelperContent::getActions($this->item->catid, 0, 'com_eventslideshow');
@@ -63,19 +64,19 @@ class EventslideshowViewEvent extends JViewLegacy
 		JToolbarHelper::title(JText::_('COM_EVENTSLIDESHOW_MANAGER_EVENT'), 'calendar eventslideshow');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_eventslideshow', 'core.create')))))
+		if (!$checkedOut && ($canDo->get('core.edit') || $authCats))
 		{
 			JToolbarHelper::apply('event.apply');
 			JToolbarHelper::save('event.save');
 		}
 
-		if (!$checkedOut && (count($user->getAuthorisedCategories('com_eventslideshow', 'core.create'))))
+		if (!$checkedOut && $authCats)
 		{
 			JToolbarHelper::save2new('event.save2new');
 		}
 
 		// If an existing item, can save to a copy.
-		if (!$isNew && (count($user->getAuthorisedCategories('com_eventslideshow', 'core.create')) > 0))
+		if (!$isNew && ($authCats > 0))
 		{
 			JToolbarHelper::save2copy('event.save2copy');
 		}
