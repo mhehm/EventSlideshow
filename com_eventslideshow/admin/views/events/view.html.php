@@ -62,9 +62,10 @@ class EventslideshowViewEvents extends JViewLegacy
 	{
 		require_once JPATH_COMPONENT . '/helpers/eventslideshow.php';
 
-		$state = $this->get('State');
-		$canDo = JHelperContent::getActions($state->get('filter.category_id'), 0, 'com_eventslideshow');
-		$user  = JFactory::getUser();
+		$state  = $this->get('State');
+		$status = $state->get('filter.state');
+		$canDo  = JHelperContent::getActions($state->get('filter.category_id'), 0, 'com_eventslideshow');
+		$user   = JFactory::getUser();
 
 		// Get the toolbar object instance
 		$bar = JToolBar::getInstance('toolbar');
@@ -76,60 +77,57 @@ class EventslideshowViewEvents extends JViewLegacy
 			JToolbarHelper::addNew('event.add');
 		}
 
-		if (($canDo->get('core.edit')))
+		if(isset($this->items[0]))
 		{
-			JToolbarHelper::editList('event.edit');
-		}
-
-		if ($canDo->get('core.edit.state'))
-		{
-			if ($this->state->get('filter.state') != 2)
+			if ($canDo->get('core.edit'))
 			{
-				JToolbarHelper::publish('events.publish', 'JTOOLBAR_PUBLISH', true);
-				JToolbarHelper::unpublish('events.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+				JToolbarHelper::editList('event.edit');
 			}
 
-			if ($this->state->get('filter.state') != -1)
+			if ($canDo->get('core.edit.state'))
 			{
-				if ($this->state->get('filter.state') != 2)
+				if ($status != 1)
+				{
+					JToolbarHelper::publish('events.publish', 'JTOOLBAR_PUBLISH', true);
+				}
+
+				if ($status != 0 || $status == '*' || $status == '')
+				{
+					JToolbarHelper::unpublish('events.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+				}
+
+				if ($status != 2)
 				{
 					JToolbarHelper::archiveList('events.archive');
 				}
-				elseif ($this->state->get('filter.state') == 2)
-				{
-					JToolbarHelper::unarchiveList('events.publish');
-				}
+
+				JToolbarHelper::checkin('events.checkin');
+			}
+
+			if ($canDo->get('core.delete') && $status == -2)
+			{
+				JToolbarHelper::deleteList('', 'events.delete', 'JTOOLBAR_EMPTY_TRASH');
+			}
+			elseif ($canDo->get('core.edit.state') && $status != -2)
+			{
+				JToolbarHelper::trash('events.trash');
+			}
+
+			// Add a batch button
+			if ($canDo->get('core.create') && $canDo->get('core.edit'))
+			{
+				JHtml::_('bootstrap.modal', 'collapseModal');
+				$title = JText::_('JTOOLBAR_BATCH');
+
+				// Instantiate a new JLayoutFile instance and render the batch button
+				$layout = new JLayoutFile('joomla.toolbar.batch');
+
+				$dhtml = $layout->render(array('title' => $title));
+				$bar->appendButton('Custom', $dhtml, 'batch');
 			}
 		}
 
-		if ($canDo->get('core.edit.state'))
-		{
-			JToolbarHelper::checkin('events.checkin');
-		}
-
-		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
-		{
-			JToolbarHelper::deleteList('', 'events.delete', 'JTOOLBAR_EMPTY_TRASH');
-		}
-		elseif ($canDo->get('core.edit.state'))
-		{
-			JToolbarHelper::trash('events.trash');
-		}
-
-		// Add a batch button
-		if ($user->authorise('core.create', 'com_eventslidesow') && $user->authorise('core.edit', 'com_eventslideshow') && $user->authorise('core.edit.state', 'com_eventslideshow'))
-		{
-			JHtml::_('bootstrap.modal', 'collapseModal');
-			$title = JText::_('JTOOLBAR_BATCH');
-
-			// Instantiate a new JLayoutFile instance and render the batch button
-			$layout = new JLayoutFile('joomla.toolbar.batch');
-
-			$dhtml = $layout->render(array('title' => $title));
-			$bar->appendButton('Custom', $dhtml, 'batch');
-		}
-
-		if ($user->authorise('core.admin', 'com_eventslideshow'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_eventslideshow');
 		}
