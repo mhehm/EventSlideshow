@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `#__eventslideshow_events` (
   `clickarticle` int(11) DEFAULT NULL,
   `language` char(7) NOT NULL,
   `description` text NOT NULL,
+  `showtitle` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `idx_catid` (`catid`),
   KEY `idx_checked_out` (`checked_out`),

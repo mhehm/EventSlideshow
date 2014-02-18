@@ -76,7 +76,7 @@ class EventslideshowViewEvent extends JViewLegacy
 		}
 
 		// If an existing item, can save to a copy.
-		if (!$isNew && ($authCats > 0))
+		if (!$isNew && $authCats)
 		{
 			JToolbarHelper::save2copy('event.save2copy');
 		}

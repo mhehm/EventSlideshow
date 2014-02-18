@@ -111,6 +111,15 @@
 			<option value="*">JALL</option>
 		</field>
 		<field
+			name="showtitle"
+			type="list"
+			default="1"
+			label="COM_EVENTSLIDESHOW_FIELD_SHOW_TITLE_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_SHOW_TITLE_DESC">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field
 			name="description"
 			type="textarea"
 			rows="3"

@@ -40,8 +40,9 @@ JHtml::_('formbehavior.chosen');
 				<?php echo $this->form->getControlGroup('clickurl'); ?>
 				<?php echo $this->form->getControlGroup('description'); ?>
 			</div>
-			<div class="span3">
+			<div class="span3 form-vertical">
 				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+				<?php echo $this->form->getControlGroup('showtitle'); ?>
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>

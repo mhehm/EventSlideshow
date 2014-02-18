@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="component"
+		label="COM_EVENTSLIDESHOW"
+		description="COM_EVENTSLIDESHOW_XML_DESCRIPTION">
+		<field
+			name="lunar_hijri_adjustment"
+			type="integer"
+			first="-3"
+			last="3"
+			step="1"
+			default="0"
+			label="COM_EVENTSLIDESHOW_FIELD_LUNAR_HIJRI_ADJUSTMENT_LABEL"
+			description="COM_EVENTSLIDESHOW_FIELD_LUNAR_HIJRI_ADJUSTMENT_DESC" />
+	</fieldset>
+	<fieldset
+		name="permissions"
+		description="JCONFIG_PERMISSIONS_DESC"
+		label="JCONFIG_PERMISSIONS_LABEL">
+		<field
+			name="rules"
+			type="rules"
+			filter="rules"
+			validate="rules"
+			component="com_eventslideshow"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			section="component" />
+	</fieldset>
+</config>
