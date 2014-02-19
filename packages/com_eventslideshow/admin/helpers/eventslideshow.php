@@ -53,19 +53,16 @@ class EventslideshowHelper extends JHelperContent
 
 		// Gregorian Date
 		$gTodayDate  = new JDate('now');
-		$gTodayMonth = $gTodayDate->calendar('n');
-		$gTodayDay   = $gTodayDate->calendar('j');
+		$gToday      = (int) $gTodayDate->calendar('md');
 
 		// Solar Date
 		$sTodayDate  = new SDate('now');
-		$sTodayMonth = $sTodayDate->calendar('n');
-		$sTodayDay   = $sTodayDate->calendar('j');
+		$sToday      = (int) $sTodayDate->calendar('md');
 
 		// Lunar Date
 		$adjustment  = $com_params->get('lunar_hijri_adjustment', 0);
 		$lTodayDate  = new LDate('now');
-		$lTodayMonth = $lTodayDate->calendar('n', false, true, $adjustment);
-		$lTodayDay   = $lTodayDate->calendar('j', false, true, $adjustment);
+		$lToday      = (int) $lTodayDate->calendar('md', false, true, $adjustment);
 
 		// get a reference to the database
 		$db = JFactory::getDBO();
@@ -74,9 +71,9 @@ class EventslideshowHelper extends JHelperContent
 			->from($db->quoteName('#__eventslideshow_events'))
 			->where($db->quoteName('state') . ' = ' . $db->quote('1'))
 			->order('ordering')
-			->where("((datetype = 'AG' AND startmonth <= " . $gTodayMonth . " AND startday <= " . $gTodayDay . " AND endmonth >= " . $gTodayMonth . " AND endday >= " . $gTodayDay . ") OR
-					  (datetype = 'AP' AND startmonth <= " . $sTodayMonth . " AND startday <= " . $sTodayDay . " AND endmonth >= " . $sTodayMonth . " AND endday >= " . $sTodayDay . ") OR
-					  (datetype = 'AD' AND startmonth <= " . $lTodayMonth . " AND startday <= " . $lTodayDay . " AND endmonth >= " . $lTodayMonth . " AND endday >= " . $lTodayDay . "))");
+			->where("((datetype = 'AG' AND CONCAT(startmonth, LPAD(startday, 2, '0')) <= " . $gToday . " AND CONCAT(endmonth, LPAD(endday, 2, '0')) >= " . $gToday . ") OR
+					  (datetype = 'AP' AND CONCAT(startmonth, LPAD(startday, 2, '0')) <= " . $sToday . " AND CONCAT(endmonth, LPAD(endday, 2, '0')) >= " . $sToday . ") OR
+					  (datetype = 'AD' AND CONCAT(startmonth, LPAD(startday, 2, '0')) <= " . $lToday . " AND CONCAT(endmonth, LPAD(endday, 2, '0')) >= " . $lToday . "))");
 
 		// Filter by language
 		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));

@@ -91,8 +91,8 @@ class EventslideshowTableEvent extends JTable
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		$startDay        = $this->startday < 10 ? '0' . $this->startday : $this->startday;
-		$endDay          = $this->endday   < 10 ? '0' . $this->endday   : $this->endday;
+		$startDay        = str_pad($this->startday, 2, "0", STR_PAD_LEFT);
+		$endDay          = str_pad($this->endday, 2, "0", STR_PAD_LEFT);
 		$startPublishing = (int) ($this->startmonth . $startDay);
 		$endPublishing   = (int) ($this->endmonth . $endDay);
 		if ($endPublishing < $startPublishing)

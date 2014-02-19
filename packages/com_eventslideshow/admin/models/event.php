@@ -161,7 +161,8 @@ class EventslideshowModelEvent extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_eventslideshow.edit.event.data', array());
+		$app  = JFactory::getApplication();
+		$data = $app->getUserState('com_eventslideshow.edit.event.data', array());
 
 		if (empty($data))
 		{
