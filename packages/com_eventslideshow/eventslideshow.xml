@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>m.h.eghtedar@gmail.com</authorEmail>
 	<authorUrl>http://joomlacode.org/gf/project/eventsslideshow/</authorUrl>
-	<version>3.2.1</version>
+	<version>3.2.2</version>
 	<description>COM_EVENTSLIDESHOW_XML_DESCRIPTION</description>
 	<install><!-- Runs on install -->
 		<sql>
@@ -29,7 +29,7 @@
 				Note that all & must be escaped to &amp; for the file to be valid
 				XML and be parsed by the installer
 			-->
-			<menu link="option=com_eventslideshow" view="links" img="class:events"
+			<menu link="option=com_eventslideshow" view="events" img="class:events"
 				alt="Eventslideshow/Events">COM_EVENTSLIDESHOW_EVENTS</menu>
 			<menu link="option=com_categories&amp;extension=com_eventslideshow"
 				view="categories" img="class:eventslideshow-cat" alt="Eventslideshow/Categories">COM_EVENTSLIDESHOW_CATEGORIES</menu>

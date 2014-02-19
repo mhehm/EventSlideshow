@@ -27,7 +27,7 @@ class EventslideshowHelper extends JHelperContent
 	 *
 	 * @since   1.6
 	 */
-	public static function addSubmenu($vName = 'events')
+	public static function addSubmenu($vName)
 	{
 		JHtmlSidebar::addEntry(
 			JText::_('COM_EVENTSLIDESHOW_SUBMENU_EVENTS'),
@@ -42,6 +42,11 @@ class EventslideshowHelper extends JHelperContent
 		);
 	}
 
+	/**
+	 * Get Events list for show slide
+	 *
+	 * @return  array
+	 */
 	public static function getEventItems($params)
 	{
 		$com_params = JComponentHelper::getParams('com_eventslideshow');

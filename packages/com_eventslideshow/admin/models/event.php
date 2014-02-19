@@ -170,14 +170,22 @@ class EventslideshowModelEvent extends JModelAdmin
 			// Prime some default values.
 			if ($this->getState('event.id') == 0)
 			{
-				$app = JFactory::getApplication();
-				$data->set('catid', $app->input->get('catid', $app->getUserState('com_eventslideshow.events.filter.category_id'), 'int'));
-				$data->set('language', $app->input->get('language', $app->getUserState('com_eventslideshow.events.filter.language'), 'string'));
-				$data->set('datetype', $app->input->get('datetype', $app->getUserState('com_eventslideshow.events.filter.datetype'), 'string'));
-				$data->set('startmonth', $app->input->get('startmonth', $app->getUserState('com_eventslideshow.events.filter.startmonth'), 'int'));
-				$data->set('startday', $app->input->get('startday', $app->getUserState('com_eventslideshow.events.filter.startday'), 'int'));
-				$data->set('endmonth', $app->input->get('endmonth', $app->getUserState('com_eventslideshow.events.filter.endmonth'), 'int'));
-				$data->set('endday', $app->input->get('endday', $app->getUserState('com_eventslideshow.events.filter.endday'), 'int'));	
+				$filters          = (array) $app->getUserState('com_eventslideshow.events.filter');
+				$filterCatId      = isset($filters['category_id']) ? $filters['category_id'] : null;
+				$filterLanguage   = isset($filters['language']) ? $filters['language'] : null;
+				$filterDateType   = isset($filters['datetype']) ? $filters['datetype'] : null;
+				$filterStartMonth = isset($filters['startmonth']) ? $filters['startmonth'] : null;
+				$filterStartDay   = isset($filters['startday']) ? $filters['startday'] : null;
+				$filterEndMonth   = isset($filters['endmonth']) ? $filters['endmonth'] : null;
+				$filterEndDay     = isset($filters['endday']) ? $filters['endday'] : null;
+
+				$data->set('catid', $app->input->getInt('catid', $filterCatId));
+				$data->set('language', $app->input->getInt('language', $filterLanguage));
+				$data->set('datetype', $app->input->getInt('datetype', $filterDateType));
+				$data->set('startmonth', $app->input->getInt('startmonth', $filterStartMonth));
+				$data->set('startday', $app->input->getInt('startday', $filterStartDay));
+				$data->set('endmonth', $app->input->getInt('endmonth', $filterEndMonth));
+				$data->set('endday', $app->input->getInt('endday', $filterEndDay));
 			}
 		}
 
@@ -213,7 +221,11 @@ class EventslideshowModelEvent extends JModelAdmin
 			if (empty($table->ordering))
 			{
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__eventslideshow_events');
+				$query = $db->getQuery(true)
+					->select('MAX(ordering)')
+					->from('#__eventslideshow_events');
+
+				$db->setQuery($query);
 				$max = $db->loadResult();
 
 				$table->ordering = $max + 1;
@@ -234,6 +246,7 @@ class EventslideshowModelEvent extends JModelAdmin
 	{
 		$condition = array();
 		$condition[] = 'catid = ' . (int) $table->catid;
+		$condition[] = 'state >= 0';
 
 		return $condition;
 	}
@@ -261,34 +274,5 @@ class EventslideshowModelEvent extends JModelAdmin
 		}
 
 		return parent::save($data);
-	}
-
-	/**
-	 * Method to change the title & alias.
-	 *
-	 * @param   integer  $category_id  The id of the parent.
-	 * @param   string   $alias        The alias.
-	 * @param   string   $name         The title.
-	 *
-	 * @return  array  Contains the modified title and alias.
-	 *
-	 * @since   3.1
-	 */
-	protected function generateNewTitle($category_id, $alias, $name)
-	{
-		// Alter the title & alias
-		$table = $this->getTable();
-
-		while ($table->load(array('alias' => $alias, 'catid' => $category_id)))
-		{
-			if ($name == $table->title)
-			{
-				$name = JString::increment($name);
-			}
-
-			$alias = JString::increment($alias, 'dash');
-		}
-
-		return array($name, $alias);
 	}
 }

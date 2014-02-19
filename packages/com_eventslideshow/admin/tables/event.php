@@ -3,7 +3,7 @@
  * @package     EventSlideshow.Administrator
  * @subpackage  com_eventslideshow
  *
- * @copyright   Copyright (C) 2012 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -78,12 +78,28 @@ class EventslideshowTableEvent extends JTable
 			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
 
+		// Set ordering
+		if ($this->state < 0)
+		{
+			// Set ordering to 0 if state is archived or trashed
+			$this->ordering = 0;
+		}
+		elseif (empty($this->ordering))
+		{
+			// Set ordering to last if ordering was 0
+			$this->ordering = self::getNextOrder($this->_db->quoteName('catid') . '=' . $this->_db->quote($this->catid) . ' AND state>=0');
+		}
+
 		// Check the publish down date is not earlier than publish up.
-		//if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up)
-		//{
-		//	$this->setError(JText::_('JGLOBAL_START_PUBLISH_AFTER_FINISH'));
-		//	return false;
-		//}
+		$startDay        = $this->startday < 10 ? '0' . $this->startday : $this->startday;
+		$endDay          = $this->endday   < 10 ? '0' . $this->endday   : $this->endday;
+		$startPublishing = (int) ($this->startmonth . $startDay);
+		$endPublishing   = (int) ($this->endmonth . $endDay);
+		if ($endPublishing < $startPublishing)
+		{
+			$this->setError(JText::_('JGLOBAL_START_PUBLISH_AFTER_FINISH'));
+			return false;
+		}
 
 		return true;
 	}

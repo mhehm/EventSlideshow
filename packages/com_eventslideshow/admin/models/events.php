@@ -21,7 +21,8 @@ class EventslideshowModelEvents extends JModelList
 	/**
 	 * Constructor.
 	 *
-	 * @param   array  An optional associative array of configuration settings.
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
 	 * @see     JController
 	 * @since   1.6
 	 */
@@ -36,14 +37,15 @@ class EventslideshowModelEvents extends JModelList
 				'state', 'a.state',
 				'ordering', 'a.ordering',
 				'language', 'a.language',
-				'catid', 'a.catid', 'category_title',
+				'catid', 'a.catid', 'category_title', 'category_id',
 				'checked_out', 'a.checked_out',
 				'checked_out_time', 'a.checked_out_time',
 				'datetype', 'a.datetype',
 				'startmonth', 'a.startmonth',
 				'startday', 'a.startday',
 				'endmonth', 'a.endmonth',
-				'endday', 'a.endday'
+				'endday', 'a.endday',
+				'showtitle', 'a.showtitle'
 			);
 		}
 

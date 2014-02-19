@@ -16,20 +16,22 @@ $published = $this->state->get('filter.state');
 		<button type="button" role="presentation" class="close" data-dismiss="modal">&#215;</button>
 		<h3><?php echo JText::_('COM_EVENTSLIDESHOW_BATCH_OPTIONS');?></h3>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body modal-batch">
 		<p><?php echo JText::_('COM_EVENTSLIDESHOW_BATCH_TIP'); ?></p>
-		<div class="control-group">
-			<div class="controls">
-				<?php echo JHtml::_('batch.language'); ?>
+		<div class="row-fluid">
+			<div class="control-group span6">
+				<div class="controls">
+					<?php echo JHtml::_('batch.language'); ?>
+				</div>
 			</div>
-		</div>
-		<?php if ($published >= 0) : ?>
-		<div class="control-group">
-			<div class="controls">
-				<?php echo JHtml::_('batch.item', 'com_eventslideshow');?>
+			<?php if ($published >= 0) : ?>
+			<div class="control-group">
+				<div class="controls">
+					<?php echo JHtml::_('batch.item', 'com_eventslideshow');?>
+				</div>
 			</div>
+			<?php endif; ?>
 		</div>
-		<?php endif; ?>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" type="button" onclick="document.id('batch-category-id').value='';document.id('batch-language-id').value='';" data-dismiss="modal">

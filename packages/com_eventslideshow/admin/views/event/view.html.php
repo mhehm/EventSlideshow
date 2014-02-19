@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die;
 
+JLoader::register('EventslideshowHelper', JPATH_COMPONENT . '/helpers/eventslideshow.php');
+
 /**
  * View to edit a event.
  *
@@ -59,7 +61,7 @@ class EventslideshowViewEvent extends JViewLegacy
 		$authCats   = count($user->getAuthorisedCategories('com_eventslideshow', 'core.create'));
 
 		// Since we don't track these assets at the item level, use the category id.
-		$canDo      = JHelperContent::getActions($this->item->catid, 0, 'com_eventslideshow');
+		$canDo      = JHelperContent::getActions('com_eventslideshow', 'category', $this->item->catid);
 
 		JToolbarHelper::title(JText::_('COM_EVENTSLIDESHOW_MANAGER_EVENT'), 'calendar eventslideshow');
 

@@ -18,6 +18,8 @@ defined('_JEXEC') or die;
  */
 class EventslideshowViewEvents extends JViewLegacy
 {
+	protected $categories;
+
 	protected $items;
 
 	protected $pagination;
@@ -31,6 +33,7 @@ class EventslideshowViewEvents extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
+		$this->categories	= $this->get('CategoryOrders');
 		$this->state         = $this->get('State');
 		$this->items         = $this->get('Items');
 		$this->pagination    = $this->get('Pagination');
@@ -64,7 +67,7 @@ class EventslideshowViewEvents extends JViewLegacy
 
 		$state  = $this->get('State');
 		$status = $state->get('filter.state');
-		$canDo  = JHelperContent::getActions($state->get('filter.category_id'), 0, 'com_eventslideshow');
+		$canDo  = JHelperContent::getActions('com_eventslideshow', 'category', $this->state->get('filter.category_id'));
 		$user   = JFactory::getUser();
 
 		// Get the toolbar object instance
