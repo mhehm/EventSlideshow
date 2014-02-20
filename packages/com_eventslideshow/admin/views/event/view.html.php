@@ -92,6 +92,6 @@ class EventslideshowViewEvent extends JViewLegacy
 			JToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::help('screen.monthes', true);
+		JToolBarHelper::help('screen.months', true);
 	}
 }
