@@ -54,6 +54,21 @@ $sortFields = $this->getSortFields();
 <form action="<?php echo JRoute::_('index.php?option=com_eventslideshow&view=events'); ?>" method="post" name="adminForm" id="adminForm">
 	<div id="j-sidebar-container" class="span2">
 		<?php echo $this->sidebar; ?>
+		<hr />
+		<div>
+			<h4 class="page-header"><?php echo JText::_('COM_EVENTSLIDESHOW_CURRENT_DATE') ?>:</h4>
+			<?php
+			$gTodayDate = new JDate('now');
+			echo JText::_('COM_EVENTSLIDESHOW_DATE_AG') . ': ' . $gTodayDate->calendar('Y-m-d') . '<hr class="hr-condensed">';
+
+			$sTodayDate = new SDate('now');
+			echo JText::_('COM_EVENTSLIDESHOW_DATE_AP') . ': ' . $sTodayDate->calendar('Y-m-d') . '<hr class="hr-condensed">';
+
+			$adjustment  = $params->get('lunar_hijri_adjustment', 0);
+			$lTodayDate  = new LDate('now');
+			echo JText::_('COM_EVENTSLIDESHOW_DATE_AD') . ': ' . $lTodayDate->calendar('Y-m-d', false, true, $adjustment);
+			?>
+		</div>
 	</div>
 	<div id="j-main-container" class="span10">
 		<?php

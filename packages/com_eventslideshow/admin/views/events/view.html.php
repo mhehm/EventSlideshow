@@ -134,6 +134,8 @@ class EventslideshowViewEvents extends JViewLegacy
 		{
 			JToolbarHelper::preferences('com_eventslideshow');
 		}
+
+		JToolBarHelper::help('screen.monthes', true);
 	}
 
 	/**

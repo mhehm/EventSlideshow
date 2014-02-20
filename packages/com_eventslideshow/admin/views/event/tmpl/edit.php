@@ -14,6 +14,8 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen');
 
+$params = (isset($this->state->params)) ? $this->state->params : new JObject;
+
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
@@ -49,30 +51,46 @@ JHtml::_('formbehavior.chosen');
 
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
-			<?php echo $this->form->getControlGroup('datetype'); ?>
-			<div class="control-group">
-				<div class="control-label hasTooltip" title="<?php echo JHtml::tooltipText('JGLOBAL_FIELD_PUBLISH_UP_DESC'); ?>">
-					<?php echo JText::_('JGLOBAL_FIELD_PUBLISH_UP_LABEL'); ?> *
+			<div class="span9">
+				<?php echo $this->form->getControlGroup('datetype'); ?>
+				<div class="control-group">
+					<div class="control-label hasTooltip" title="<?php echo JHtml::tooltipText('JGLOBAL_FIELD_PUBLISH_UP_DESC'); ?>">
+						<?php echo JText::_('JGLOBAL_FIELD_PUBLISH_UP_LABEL'); ?> *
+					</div>
+					<div class="controls form-inline">
+						<?php echo $this->form->getLabel('startmonth'); ?>
+						<?php echo $this->form->getInput('startmonth'); ?>
+						<?php echo $this->form->getLabel('startday'); ?>
+						<?php echo $this->form->getInput('startday'); ?>
+					</div>
 				</div>
-				<div class="controls form-inline">
-					<?php echo $this->form->getLabel('startmonth'); ?>
-					<?php echo $this->form->getInput('startmonth'); ?>
-					<?php echo $this->form->getLabel('startday'); ?>
-					<?php echo $this->form->getInput('startday'); ?>
+				<div class="control-group">
+					<div class="control-label hasTooltip" title="<?php echo JHtml::tooltipText('JGLOBAL_FIELD_PUBLISH_DOWN_DESC'); ?>">
+						<?php echo JText::_('JGLOBAL_FIELD_PUBLISH_DOWN_LABEL'); ?> *
+					</div>
+					<div class="controls form-inline">
+						<?php echo $this->form->getLabel('endmonth'); ?>
+						<?php echo $this->form->getInput('endmonth'); ?>
+						<?php echo $this->form->getLabel('endday'); ?>
+						<?php echo $this->form->getInput('endday'); ?>
+					</div>
 				</div>
+				<?php echo JLayoutHelper::render('joomla.edit.publishingdata', $this); ?>
 			</div>
-			<div class="control-group">
-				<div class="control-label hasTooltip" title="<?php echo JHtml::tooltipText('JGLOBAL_FIELD_PUBLISH_DOWN_DESC'); ?>">
-					<?php echo JText::_('JGLOBAL_FIELD_PUBLISH_DOWN_LABEL'); ?> *
-				</div>
-				<div class="controls form-inline">
-					<?php echo $this->form->getLabel('endmonth'); ?>
-					<?php echo $this->form->getInput('endmonth'); ?>
-					<?php echo $this->form->getLabel('endday'); ?>
-					<?php echo $this->form->getInput('endday'); ?>
-				</div>
+			<div class="span3">
+				<h4 class="page-header"><?php echo JText::_('COM_EVENTSLIDESHOW_CURRENT_DATE') ?>:</h4>
+				<?php
+				$gTodayDate = new JDate('now');
+				echo JText::_('COM_EVENTSLIDESHOW_DATE_AG') . ': ' . $gTodayDate->calendar('Y-m-d') . '<hr class="hr-condensed">';
+
+				$sTodayDate = new SDate('now');
+				echo JText::_('COM_EVENTSLIDESHOW_DATE_AP') . ': ' . $sTodayDate->calendar('Y-m-d') . '<hr class="hr-condensed">';
+
+				$adjustment  = $params->get('lunar_hijri_adjustment', 0);
+				$lTodayDate  = new LDate('now');
+				echo JText::_('COM_EVENTSLIDESHOW_DATE_AD') . ': ' . $lTodayDate->calendar('Y-m-d', false, true, $adjustment);
+				?>
 			</div>
-			<?php echo JLayoutHelper::render('joomla.edit.publishingdata', $this); ?>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
