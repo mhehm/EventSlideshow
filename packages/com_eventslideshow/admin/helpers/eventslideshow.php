@@ -76,8 +76,7 @@ class EventslideshowHelper extends JHelperContent
 					  (datetype = 'AD' AND CONCAT(startmonth, LPAD(startday, 2, '0')) <= " . $lToday . " AND CONCAT(endmonth, LPAD(endday, 2, '0')) >= " . $lToday . "))");
 
 		// Filter by language
-		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
-		if ($model->getState('filter.language'))
+		if (JFactory::getApplication()->getLanguageFilter())
 		{
 			$query->where('language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
 		}
