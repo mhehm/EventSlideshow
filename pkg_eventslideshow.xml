@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="package" version="3.1" method="upgrade">
+<extension type="package" version="3.2" method="upgrade">
 	<name>PKG_EVENTSLIDESHOW</name>
 	<author>Mohammad Hasani Eghtedar</author>
 	<creationDate>June 2012</creationDate>
 	<packagename>eventslideshow</packagename>
 	<version>3.2.3</version>
-	<url>https://github.com/mhehm/EventSlideshow</url>
+	<url>http://www.mhehm.ir</url>
 	<packager>Mohammad Hasani Eghtedar</packager>
-	<packagerurl>https://github.com/mhehm/EventSlideshow</packagerurl>
+	<packagerurl>http://www.mhehm.ir</packagerurl>
 	<description>PKG_EVENTSLIDESHOW_XML_DESCRIPTION</description>
-	<update>http://joomlacode.org/gf/project/eventsslideshow/scmsvn/?action=browse&amp;path=%2F*checkout*%2Ftrunk%2Feventslideshow-update.xml</update>
+	<update>http://www.mhehm.ir/updates/eventslideshow.xml</update>
 	<files folder="packages">
 		<file type="component" id="com_eventslideshow" >com_eventslideshow.zip</file>
 		<file type="module" id="mod_eventslideshow" client="site">mod_eventslideshow.zip</file>
