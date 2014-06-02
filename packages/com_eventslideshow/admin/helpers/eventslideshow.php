@@ -62,7 +62,8 @@ class EventslideshowHelper extends JHelperContent
 		// Lunar Date
 		$adjustment  = $com_params->get('lunar_hijri_adjustment', 0);
 		$lTodayDate  = new LDate('now');
-		$lToday      = (int) $lTodayDate->calendar('md', false, true, $adjustment);
+		$lTodayDate->modify($adjustment . " days");
+		$lToday      = (int) $lTodayDate->calendar('md', false, true);
 
 		// get a reference to the database
 		$db = JFactory::getDBO();
@@ -325,8 +326,6 @@ class LDate extends JDate
 	const AM_UPPER      = "\x043\x03";
 	const LUNAR_EPOCH   = 1948439.5;
 
-	public static $lunar_day_setting = 0;
-
 	/**
 	 * Translates month number to a string.
 	 *
@@ -379,10 +378,8 @@ class LDate extends JDate
 	 *
 	 * @since   11.1
 	 */
-	public function calendar($format, $local = false, $translate = true, $lunar_day_setting = 0)
+	public function calendar($format, $local = false, $translate = true)
 	{
-		self::$lunar_day_setting = $lunar_day_setting;
-
 		// Do string replacements for date format options that can be translated.
 		$format = preg_replace('/(^|[^\\\])d/', "\\1".self::DAY_NUMBER2, $format);
 		$format = preg_replace('/(^|[^\\\])j/', "\\1".self::DAY_NUMBER, $format);
@@ -463,7 +460,7 @@ class LDate extends JDate
 		$jd    = floor($jd) + 0.5;
 		$year  = floor(((30 * ($jd - self::LUNAR_EPOCH)) + 10646) / 10631);
 		$month = min(12, ceil(($jd - (29 + self::lunartojd(1, 1, $year))) / 29.5) + 1);
-		$day   = ($jd - self::lunartojd($month, 1, $year)) + self::$lunar_day_setting;
+		$day   = ($jd - self::lunartojd($month, 1, $year)) + 1;
 
 		return array('year'=>$year, 'mon'=>$month,'day'=> $day);
 	}
