@@ -66,7 +66,8 @@ $sortFields = $this->getSortFields();
 
 			$adjustment  = $params->get('lunar_hijri_adjustment', 0);
 			$lTodayDate  = new LDate('now');
-			echo JText::_('COM_EVENTSLIDESHOW_DATE_AD') . ': ' . $lTodayDate->calendar('Y-m-d', false, true, $adjustment);
+			$lTodayDate->modify($adjustment . " days");
+			echo JText::_('COM_EVENTSLIDESHOW_DATE_AD') . ': ' . $lTodayDate->calendar('Y-m-d');
 			?>
 		</div>
 	</div>
